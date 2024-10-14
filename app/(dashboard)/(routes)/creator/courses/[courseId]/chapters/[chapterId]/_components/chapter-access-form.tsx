@@ -82,7 +82,7 @@ export const ChapterAccessForm = ({
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4"  >
 
-            <div className="font-medium flex items-center justify-between">
+            <div className="font-medium flex items-center justify-between text-gray-700">
                 Chapter Access
                 <Button onClick={toggleEdit} variant="ghost"> 
 
@@ -98,7 +98,7 @@ export const ChapterAccessForm = ({
             </div>
 
             {!isEditing && (
-                <div  className={cn("text-sm mt-2",
+                <div  className={cn("text-gray-700 text-sm mt-2",
                      !initialData.IsFree && "text-slate-500 italic"
                 )}>
                     {initialData.IsFree ? (

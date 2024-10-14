@@ -84,7 +84,7 @@ import { Badge } from "../../../../../../../components/ui/badge";
               {(provided:  any) => (
                     <div
         className={cn(
-                      "flex items-center gap-x-border-slate-200 border text-slate-700 rounded-md mb-4 text-sm",
+                      "flex items-center gap-x-border-slate-200 border text-slate-200 rounded-md mb-4 text-sm",
                               chapter.isPublished && "bg-sky-100 border-sky-200 text-sky-500"
                                         )}
                                    ref={provided.innerRef}

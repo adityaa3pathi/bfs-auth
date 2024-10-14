@@ -3,15 +3,20 @@
 import React from "react";
 import { Banner } from "../../../../../../components/banner";
 import { VideoPlayer } from "./_components/video-player";
-import { Purchase } from "@prisma/client";
+import { Chapter, Course, Purchase, UserProgress } from "@prisma/client";
 import { CourseEnrollButton } from "./_components/course-enroll-button";
 import { Separator } from "../../../../../../components/ui/separator";
 import { Preview } from "../../../../../../components/preview";
 import { CourseProgressButton } from "./_components/course-progress-button";
+import { CourseContainer } from "../../_components/course-list";
 
 interface ChapterClientPageProps {
   chapter: any;
-  course: any;
+  course: Course & {
+    chapters: (Chapter & {
+        userProgress: UserProgress[] | null;
+    })[]
+};
   purchase: any;
   attachments: any;
   nextChapter: any;
@@ -19,9 +24,10 @@ interface ChapterClientPageProps {
   isLocked: boolean;
   completedOnEnd: boolean;
   params: { courseId: string; chapterId: string };
+  progressCount: number;
 }
 
-const ChapterClientPage = ({
+const ChapterClientPage =  ({
   chapter,
   nextChapter,
   userProgress,
@@ -29,10 +35,12 @@ const ChapterClientPage = ({
   purchase,
   completedOnEnd,
   params,
-  course
+  course,
+  progressCount,
 }: ChapterClientPageProps) => {
   return (
     <div>
+      <div className=""></div>
       {userProgress?.isCompleted && (
         <Banner variant="suceess" label="You already completed this chapter." />
       )}
@@ -79,6 +87,7 @@ const ChapterClientPage = ({
             <div>
               <Preview  value={chapter.description}/>
             </div>
+            <CourseContainer course={course} progressCount={progressCount}/>
         </div>
       </div>
     </div>

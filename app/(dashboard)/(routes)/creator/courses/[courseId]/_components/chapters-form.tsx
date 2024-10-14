@@ -105,7 +105,7 @@ export const ChaptersForm = ({
                         )}
 
                     </div>)}
-            <div className="font-medium flex items-center justify-between">
+            <div className="font-medium flex items-center justify-between text-gray-200">
                 Course chapters 
                 <Button onClick={toggleCreating} variant="ghost"> 
 
@@ -136,6 +136,7 @@ export const ChaptersForm = ({
                                     disabled={isSubmitting}
                                     placeholder="Name of the chapter"
                                     {...field}
+                                    className="text-gray-400"
                                     />
                                 </FormControl>
                                 <FormMessage/>

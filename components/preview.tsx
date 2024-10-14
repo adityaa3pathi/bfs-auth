@@ -18,7 +18,7 @@ export const Preview = ( {
         ssr: false }), []);
 
         return (
-            <div className="bg-white">
+            <div className="">
                 <ReactQuill
                 theme="bubble"
                 value={value}

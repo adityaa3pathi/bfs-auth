@@ -147,7 +147,7 @@ const CourseIdPage =  async (
                     <div>
                         <div className="flex items-center gap-x-2">
                             <IconBadge icon={ListChecks} />
-                            <h2>
+                            <h2 className="text-gray-700">
                                 Course chapters
                             </h2>
                         </div>
@@ -159,7 +159,7 @@ const CourseIdPage =  async (
                     <div>
                     <div className="flex items-center gap-x-2">
                         <IconBadge icon={CircleDollarSign} />
-                        <h2 className="text-xl">
+                        <h2 className="text-gray-700">
                             Sell your course
                         </h2>
                     </div>
@@ -171,7 +171,7 @@ const CourseIdPage =  async (
                 <div>
                     <div className="flex items-center gap-x-2">
                             <IconBadge icon={File} />
-                            <h2 className="text-xl">
+                            <h2 className="text-gray-700  text-xl">
                                 Resourses and Attachments
                             </h2>
                      </div>

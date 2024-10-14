@@ -78,11 +78,10 @@
 import { auth } from "@clerk/nextjs/server";
 import prismadb from "../../../../lib/db";
 import { redirect } from "next/navigation";
-import { getProgress } from "../../../../actions/get-progress";
-import { CourseSidebar } from "./_components/course-sidebar";
-import NavBar from "../../../componentss/nav-bar";
 import Footer from "../../../componentss/footer";
-import { CourseNavbar } from "./_components/CourseNavBar";
+import { getProgress } from "../../../../actions/get-progress";
+import NavBar from "../../../componentss/nav-bar";
+
 
 
 
@@ -137,13 +136,9 @@ const CourseLayout = async ({
   return (
     <div className="flex flex-col justify-between bg-gray-00 text-gray-200 min-h-screen">
     <div className="h-[80px] fixed w-full z-50">
-      <CourseNavbar 
-      course={course} progressCount={progressCount}/>
+    <NavBar/>
     </div>
-    <main className="flex flex-row justify-between gap-4 mt-[80px]"> {/* Ensure space below NavBar */}
-      <div className=" hidden md:flex w-[250px] flex-shrink-0"> {/* Define width for SideBar */}
-        <CourseSidebar course={course} progressCount={progressCount} />
-      </div>
+    <main className="flex bg-gray-900 flex-row justify-between gap-4 pt-[80px]">
       <div className="flex-grow overflow-auto m-4"> {/* Adjust children to avoid overlap */}
         {children}
       </div>

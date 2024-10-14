@@ -4,9 +4,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import "../styles/tailwind.css"
-import "../styles/index.css"
-import "../styles/font.css"
+
 
 
 import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'

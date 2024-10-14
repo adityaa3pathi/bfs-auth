@@ -177,7 +177,7 @@ export const ChapterVideoForm = ({
 
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
-            <div className="font-medium flex items-center justify-between">
+            <div className="font-medium flex items-center justify-between text-gray-700">
                 Chapter Video
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? (
@@ -220,7 +220,7 @@ export const ChapterVideoForm = ({
                       <input
             type="text"
             placeholder="Enter YouTube video URL"
-            className="border p-2 w-full rounded"
+            className="border p-2 w-full rounded text-gray-700"
             onChange={(e) => onSubmit({ videoUrl: e.target.value })}
         />
        <div className="text-xs text-muted-foreground mt-4">

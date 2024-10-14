@@ -83,6 +83,7 @@ toast.success("Course created")
                             </FormLabel>
                             <FormControl>
                                 <Input
+                                className="text-gray-600"
                                 disabled={isSubmitting}
                                 placeholder="e.g. 'How to master dribble'"
                                 {...field}

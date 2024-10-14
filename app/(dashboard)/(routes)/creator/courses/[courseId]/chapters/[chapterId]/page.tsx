@@ -73,6 +73,7 @@ const ChapterIdPage =  async({
         )
     }
      <div className=" p-6">
+     <div className=" bg-slate-600 p-6">
           <div className="flex items-center justify-between">
             <div className="w-full">
                      <Link 
@@ -86,7 +87,7 @@ const ChapterIdPage =  async({
                                 <h1 className="text-2xl font-medium">
                                       Chapter Creation
                                </h1>
-                               <span className="text-sm text-slate-700" >
+                               <span className="text-sm text-slate-200" >
                                Complete all fields {completionText}
                                </span>
 

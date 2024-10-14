@@ -72,7 +72,7 @@ export const ChapterTitleForm = ({
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4"  >
 
-            <div className="font-medium flex items-center justify-between">
+            <div className="font-medium flex items-center justify-between text-gray-700 ">
                 Chapter title
                 <Button onClick={toggleEdit} variant="ghost"> 
 
@@ -88,7 +88,7 @@ export const ChapterTitleForm = ({
             </div>
 
             {!isEditing && (
-                <p  className="text-sm mt-2 ">
+                <p  className=" text-gray-700  text-sm mt-2 ">
                     {initialData.title}
                 </p>
             )}
@@ -107,7 +107,8 @@ export const ChapterTitleForm = ({
                                 <FormControl>
                                     <Input
                                     disabled={isSubmitting}
-                                    placeholder="e.g. ntroduction to shooting"
+                                    placeholder="e.g. introduction to shooting"
+                                    className="text-gray-700"
                                     {...field}
                                     /> 
                                 </FormControl>

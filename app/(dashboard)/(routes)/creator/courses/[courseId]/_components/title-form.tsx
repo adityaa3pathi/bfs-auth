@@ -109,6 +109,7 @@ export const TitleForm = ({
                             <FormItem>
                                 <FormControl>
                                     <Input
+                                    className="text-gray-700"
                                     disabled={isSubmitting}
                                     placeholder="e.g. Shooting hacks that actually work"
                                     {...field}

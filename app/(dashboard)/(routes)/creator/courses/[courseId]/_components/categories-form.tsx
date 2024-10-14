@@ -115,7 +115,7 @@ export const CategoryForm = ({
                         render={({field}) => (
                             <FormItem>
                                 <FormControl>
-                                    <div className="position-relative bg-gray-700 text-gray-200">
+                                    <div className="position-relative bg-gray-700 text-gray-700">
                                    <Combobox
                                    options={options}
                                    {...field}

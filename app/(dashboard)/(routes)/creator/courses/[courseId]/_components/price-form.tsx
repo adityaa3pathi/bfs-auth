@@ -118,6 +118,7 @@ export const PriceForm = ({
                                     disabled={isSubmitting}
                                     placeholder="Set a price for this course"
                                     {...field}
+                                    className="text-gray-700"
                                     />
                                 </FormControl>
                                 <FormMessage/>

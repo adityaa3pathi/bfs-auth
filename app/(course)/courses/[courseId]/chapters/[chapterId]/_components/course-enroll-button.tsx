@@ -17,7 +17,7 @@ export const CourseEnrollButton = ({
     return (
     <Button
     size="sm"
-    className="w-full md:w-auto">
+    className="bg-gray-700  w-full md:w-auto">
    Enroll for {formatPrice(price)}
     </Button>)
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatPrice } from "../lib/format";
+import { formatPrice } from "../../../lib/format";
 
 interface CourseCardProps {
     id: string;
@@ -8,7 +8,7 @@ interface CourseCardProps {
     imageUrl: string;
     chaptersLength: number;
     price: number;
-    progress: number | null;
+    
     category: string;
 }
 
@@ -18,7 +18,7 @@ export const CourseCard = ({
     imageUrl,
     chaptersLength,
     price,
-    progress,
+    
     category,
 }: CourseCardProps) => {
   return ( 
@@ -31,7 +31,7 @@ export const CourseCard = ({
     <Link href={`/courses/${id}`}
     className="col-span-2 text-left text-gray-600 hover:text-gray-700"
     >
-        <div className="relative  w-full aspect-video rounded-md overflow-hidden">
+        <div className="relative  w-full aspect-video rounded-md overflow-hidden shadow-lg">
       <Image
       width={220}
       height={150}

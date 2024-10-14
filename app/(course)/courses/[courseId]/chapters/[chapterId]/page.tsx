@@ -4,6 +4,10 @@ import React from "react";
 import { getChapter } from "../../../../../../actions/get-chapter";
 import ChapterClientPage from "./chapter-client-page"; // Client Component
 
+import prismadb from "../../../../../../lib/db";
+import { getProgress } from "../../../../../../actions/get-progress";
+
+
 const ChapterIdPage = async ({
   params,
 }: {
@@ -37,11 +41,43 @@ const ChapterIdPage = async ({
   const isLocked = !chapter.IsFree && !purchase;
   const completedOnEnd = !!purchase && !userProgress?.isCompleted;
 
+
+
+  const coursee = await prismadb.course.findUnique({
+    where: {
+      id: params.courseId,
+    },
+    include: {
+      chapters: {
+        where: {
+          isPublished: true,
+        },
+        include: {
+          userProgress: {
+            where: {
+              userId,
+            },
+          },
+        },
+        orderBy: {
+          position: "asc",
+        },
+      },
+    },
+  });
+
+  if(!coursee) {
+    redirect('/');
+  }
+
+  const progressCount = await getProgress(userId, coursee.id);
+
+
   // Pass the fetched data to a client-side component
   return (
     <ChapterClientPage
       chapter={chapter}
-      course={course}
+      course={coursee}
       attachments={attachments}
       nextChapter={nextChapter}
       userProgress={userProgress}
@@ -49,6 +85,7 @@ const ChapterIdPage = async ({
       purchase={purchase}
       completedOnEnd={completedOnEnd}
       params={params}
+      progressCount={progressCount}
     />
   );
 };
