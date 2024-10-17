@@ -1,18 +1,40 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server';
+import { jwtVerify } from 'jose'; // Import jwtVerify from jose
+import { cookies } from 'next/headers'; // Use cookies utility to access cookies
 
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
-const isProtectedRoute = createRouteMatcher(['/courses/(.*)/'])
+// Convert your secret to Uint8Array for jose
+const secret = new TextEncoder().encode(JWT_SECRET);
 
+export async function middleware(request: Request) {
+  console.log("inside the middleware 1");
 
-export default clerkMiddleware((auth, req) => {
-    if (isProtectedRoute(req)) auth().protect()
-  })
+  // Access cookies using the cookies utility
+  const cookieStore = cookies();
+  const token = cookieStore.get('authToken')?.value;
 
-export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
-  ],
+  console.log(token);
+
+  if (!token) {
+    return NextResponse.redirect(new URL('/auth/login', request.url)); // Redirect to login page if no token
+  }
+
+  try {
+    // Verify JWT token using jose
+    await jwtVerify(token, secret);
+
+    console.log("inside the middleware 2");
+    return NextResponse.next(); // Continue if token is valid
+  } catch (error) {
+    console.log(error);
+    console.log("inside the middleware 3");
+    const signInUrl = new URL('/sign-in', request.url); // Create an absolute URL
+    return NextResponse.redirect(signInUrl);
+  }
 }
+
+// Apply middleware to protect routes under '/search'
+export const config = {
+  matcher: ['/search'], // Protect '/search' routes
+};

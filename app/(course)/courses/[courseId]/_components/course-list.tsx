@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../../lib/auth-utils";
 import { redirect } from "next/navigation";
 
 import { Chapter, Course, UserProgress } from "prisma/prisma-client"

@@ -1,5 +1,5 @@
 import prismadb from "@/../lib/db";
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../lib/auth-utils";
 import { NextResponse } from "next/server";
 
 
@@ -16,7 +16,7 @@ export async function DELETE(
     try {
 
 
-        const {userId } = auth(); 
+        const userId = await getUserId(); 
 
         if(!userId) {
             return new NextResponse("Unauthorized", {status: 401});
@@ -67,7 +67,7 @@ export async function PATCH(
 
 {
     try {
-        const {userId } = auth();
+        const userId = await getUserId();
         const {courseId} = params;
         const values = await req.json();
 

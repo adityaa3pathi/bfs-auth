@@ -75,7 +75,7 @@
 // }
 
 
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../lib/auth-utils";
 import prismadb from "../../../../lib/db";
 import { redirect } from "next/navigation";
 import Footer from "../../../componentss/footer";
@@ -92,7 +92,7 @@ const CourseLayout = async ({
   children: React.ReactNode;
   params: { courseId: string };
 }) => {
-  const { userId } = auth();
+  const userId = await getUserId();
 
   // Handle the case where the user is not authenticated
   if (!userId) {

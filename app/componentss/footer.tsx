@@ -7,7 +7,7 @@ import { Text } from "./ui/text"
 
 
     return (
-        <div className="flex flex-col items-center justify-center bg-gray-00 py-20 md:py-5">
+        <div className="flex flex-col items-center justify-center bg-gray-800 py-20 md:py-5">
   <div className="container-xs flex flex-col items-center gap-16 px-6 md:px-5 sm:gap-8">
     <div className="flex w- [30%] flex-col items-center gap-8 md:w-full">
       <Text size="textlg" as="p" className="text-[18px] font-normal text-gray-100">

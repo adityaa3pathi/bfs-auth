@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../../lib/auth-utils";
 import { NextResponse } from "next/server";
 import prismadb from "../../../../../lib/db";
 
@@ -11,7 +11,7 @@ export async function PATCH(
 {params}: { params: {courseId: string}}
 ) {
     try {
-        const {userId} = auth();
+        const userId = await getUserId();
 
         if(!userId) {
             return new NextResponse("Unauthorizerd", {status: 401});

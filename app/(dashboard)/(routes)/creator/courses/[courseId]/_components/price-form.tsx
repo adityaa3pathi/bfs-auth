@@ -78,7 +78,7 @@ export const PriceForm = ({
         <div className="mt-6 border bg-slate-700 rounded-md p-4"  >
 
             <div className="font-medium flex items-center justify-between">
-                Course price
+                Discounted price
                 <Button onClick={toggleEdit} variant="ghost"> 
 
                 {isEditing ? (

@@ -7,7 +7,7 @@ import "./globals.css";
 
 
 
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+
 import { ToastProvider } from "@/../components/providers/toaster-provider";
 import { ConfettiProvider } from "../components/providers/confetti-provider";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    
       <html lang="en">
         <body >
           
@@ -39,6 +39,6 @@ export default function RootLayout({
             {children}</main>
         </body>
       </html>
-    </ClerkProvider>
+   
   );
 }

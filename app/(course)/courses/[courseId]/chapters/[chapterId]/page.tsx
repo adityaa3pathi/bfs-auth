@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../../../lib/auth-utils";
 import { redirect } from "next/navigation";
 import React from "react";
 import { getChapter } from "../../../../../../actions/get-chapter";
@@ -13,7 +13,7 @@ const ChapterIdPage = async ({
 }: {
   params: { courseId: string; chapterId: string };
 }) => {
-  const { userId } = auth();
+  const  userId = await getUserId(); 
 
   if (!userId) {
     redirect("/");

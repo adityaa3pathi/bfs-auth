@@ -20,14 +20,15 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { cn  } from "@/../lib/utils";
 import { Textarea } from "@/../components/ui/textarea";
-import { Course, Chapter } from "@prisma/client";
+import { Course, Chapter, Section } from "@prisma/client";
 import { ChaptersList } from "./chapters-list";
 
 
 
 interface ChaptersFormProps {
-    initialData: Course &   {chapters: Chapter[] };
+    initialData:   Section &  {chapters: Chapter[] };
     courseId: string
+    sectionId: string
 };
 
 
@@ -39,7 +40,8 @@ const formSchema = z.object({
 
 export const ChaptersForm = ({
     initialData,
-    courseId
+    courseId,
+    sectionId
 }: ChaptersFormProps) =>  {
 
     const [isCreating, setIsCreating] = useState(false);
@@ -60,7 +62,7 @@ export const ChaptersForm = ({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-                await axios.post(`/api/courses/${courseId}/chapters`, values);
+                await axios.post(`/api/courses/${courseId}/sections/${sectionId}/chapters`, values);
                 toast.success("Chapter Created");
                 toggleCreating();
                 router.refresh();
@@ -73,111 +75,111 @@ export const ChaptersForm = ({
         }
     }
 
-    const onReorder = async (updateData: { id: string; position: number }[]) => {
-        try {
-            setIsUpdating(true);
+    // const onReorder = async (updateData: { id: string; position: number }[]) => {
+    //     try {
+    //         setIsUpdating(true);
 
-            await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
-                list: updateData
-            });
-            toast.success("chapter reordered");
-            router.refresh();
-        }
-        catch {
-            toast.error("Something went wrong");
-        }
-        finally {
-            setIsUpdating(false);
-        }
-    }
+    //         await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
+    //             list: updateData
+    //         });
+    //         toast.success("chapter reordered");
+    //         router.refresh();
+    //     }
+    //     catch {
+    //         toast.error("Something went wrong");
+    //     }
+    //     finally {
+    //         setIsUpdating(false);
+    //     }
+    // }
 
     const onEdit = (id: string) => {
-        router.push(`/creator/courses/${courseId}/chapters/${id}`)
+        router.push(`/creator/courses/${courseId}/sections/${sectionId}/chapters/${id}`)
     }
 
     return (
-        <div className=" relative mt-6 border bg-slate-700 rounded-md p-4"  >
-                { isUpdating  && ( <div className="absolute h-full w-full bg-slate-100 rounded-md p-4">
-                        {isUpdating &&  (
-                            <div className="absolute h-full w-full bg-slate-500/2 top-0 right-0 rounded-m flex items-center justify-center">
-                                <Loader2 className="aniimate-spin h-6 w-6 text-sky-700"/>
-                            </div>
-                        )}
-
-                    </div>)}
-            <div className="font-medium flex items-center justify-between text-gray-200">
-                Course chapters 
-                <Button onClick={toggleCreating} variant="ghost"> 
-
-                {isCreating? (
-                    <>Cancel</>
-                ) : (
-                    <>
-                    <PlusCircle className="h-4 w-4 mr-2" />
-                    Add a chapter
-                    </>
+<div className=" relative mt-6 border bg-slate-700 rounded-md p-4"  >
+        { isUpdating  && ( <div className="absolute h-full w-full bg-slate-100 rounded-md p-4">
+                {isUpdating &&  (
+                    <div className="absolute h-full w-full bg-slate-500/2 top-0 right-0 rounded-m flex items-center justify-center">
+                        <Loader2 className="aniimate-spin h-6 w-6 text-sky-700"/>
+                    </div>
                 )}
-                </Button>
-            </div>
 
-            {isCreating && (
-                <Form {...form}>
-                    <form 
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-4 mt-4">
+            </div>)}
+    <div className="font-medium flex items-center justify-between text-gray-200">
+        Course chapters 
+        <Button onClick={toggleCreating} variant="ghost"> 
 
-                        <FormField
-                        control={form.control}
-                        name="title"
-                        render={({field}) => (
-                            <FormItem>
-                                <FormControl>
-                                    <Input
-                                    disabled={isSubmitting}
-                                    placeholder="Name of the chapter"
-                                    {...field}
-                                    className="text-gray-400"
-                                    />
-                                </FormControl>
-                                <FormMessage/>
-                            </FormItem>
-                        )}
-                        />
+        {isCreating? (
+            <>Cancel</>
+        ) : (
+            <>
+            <PlusCircle className="h-4 w-4 mr-2" />
+            Add a chapter
+            </>
+        )}
+        </Button>
+    </div>
 
-                        <div className="flex items-center gap-x-2">
-                            <Button
-                                disabled={!isValid || isSubmitting}
-                                type="submit"
-                            >
+    {isCreating && (
+        <Form {...form}>
+            <form 
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 mt-4">
 
-                                Create
+                <FormField
+                control={form.control}
+                name="title"
+                render={({field}) => (
+                    <FormItem>
+                        <FormControl>
+                            <Input
+                            disabled={isSubmitting}
+                            placeholder="Name of the chapter"
+                            {...field}
+                            className="text-gray-400"
+                            />
+                        </FormControl>
+                        <FormMessage/>
+                    </FormItem>
+                )}
+                />
 
-                            </Button>
+                <div className="flex items-center gap-x-2">
+                    <Button
+                        disabled={!isValid || isSubmitting}
+                        type="submit"
+                    >
 
-                        </div>
-                    </form>
-                </Form>
-            )}
-            {!isCreating && (
-                <div className={cn("text-sm mt-2", !initialData.chapters.length && "text-slate-500 italic")}>
-                    {!initialData.chapters.length && "No chapters"}
-                    { 
-                    <ChaptersList 
-                      onEdit={onEdit}
-                      onReorder={onReorder}
-                      items={initialData.chapters || []}
-                    />
-                    }
+                        Create
+
+                    </Button>
+
                 </div>
-            )
-
+            </form>
+        </Form>
+    )}
+    {!isCreating && (
+        <div className={cn("text-sm mt-2", !initialData.chapters.length && "text-slate-500 italic")}>
+            {!initialData.chapters.length && "No chapters"}
+            { 
+            <ChaptersList 
+                onEdit={onEdit}
+                // onReorder={onReorder}
+                items={initialData.chapters || []}
+            />
             }
-            {!isCreating && (
-                <p 
-                className="text-xs text-muted-foreground mt-4" >
-                    Drag and Drop to reorder the Chapters
-                </p>
-            )}
         </div>
+    )
+
+    }
+    {!isCreating && (
+        <p 
+        className="text-xs text-muted-foreground mt-4" >
+            Drag and Drop to reorder the Chapters
+        </p>
+    )}
+</div>
     )
 }

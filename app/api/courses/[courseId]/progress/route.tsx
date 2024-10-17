@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../../lib/auth-utils";
 import { NextResponse } from "next/server";
 import prismadb  from "../../../../../lib/db";
 
@@ -9,7 +9,7 @@ export async function PUT(req: Request,
 ) {
     
 try{
-      const {userId} = auth();
+    const userId = await getUserId();
       const {isCompleted} = await req.json();
 
     if(!userId) {

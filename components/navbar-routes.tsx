@@ -1,6 +1,6 @@
 "use client"
 
-import {UserButton, useAuth } from "@clerk/nextjs"
+
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
@@ -16,7 +16,7 @@ import  Image  from "next/image";
 
 export const NavbarRoutes = () => {
 
-    const {userId} = useAuth();
+
 
         const pathname = usePathname();
         const router = useRouter();

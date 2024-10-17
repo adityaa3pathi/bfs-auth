@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../../lib/auth-utils";
 import { NextResponse } from "next/server"
 import prismadb from "../../../../../lib/db";
 import { isTeacher } from "../../../../../lib/teacher";
@@ -10,7 +10,7 @@ export async function POST(
 
 {try {
 
-    const {userId} = auth();
+    const userId = await getUserId();
     const { url }  = await req.json();
 
     if(!userId || !isTeacher(userId)) {

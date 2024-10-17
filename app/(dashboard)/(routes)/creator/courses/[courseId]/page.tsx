@@ -4,7 +4,7 @@ import { CategoryForm } from "./_components/categories-form";
  import { ImageForm } from "./_components/image-form";
 import { IconBadge } from "@/../components/icon-badge";
 import prismadb from "@/../lib/db";
-import { auth } from "@clerk/nextjs/server";
+import { getUserId } from "../../../../../../lib/auth-utils";
 import { CircleDollarSign, LayoutDashboard, ListChecks } from "lucide-react";
 import {redirect} from "next/navigation" 
 import { PriceForm } from "./_components/price-form";
@@ -13,6 +13,8 @@ import { AttachmentForm } from "./_components/attachment-form";
 import { ChaptersForm } from "./_components/chapters-form";
 import { Banner } from "../../../../../../components/banner";
 import { Actions } from "./_components/actions";
+import { SectionsForm } from "./_components/section-form";
+import { RealPriceForm } from "./_components/fake-price";
 
 
 
@@ -24,7 +26,7 @@ const CourseIdPage =  async (
 
 
 
-    const {userId} = auth();
+    const userId = await getUserId();
 
     if(!userId) {
         return redirect("/");
@@ -38,6 +40,11 @@ const CourseIdPage =  async (
         },
         include: {
             chapters: {
+                orderBy: {
+                    position: "asc",
+                }
+            },
+            sections: {
                 orderBy: {
                     position: "asc",
                 }
@@ -68,6 +75,7 @@ const CourseIdPage =  async (
             course.description,
             course.imageUrl,
             course.price,
+            course.realPrice,
             course.categoryId,
             course.chapters.some(chapter => chapter.isPublished)
         ]
@@ -148,10 +156,10 @@ const CourseIdPage =  async (
                         <div className="flex items-center gap-x-2">
                             <IconBadge icon={ListChecks} />
                             <h2 className="text-gray-700">
-                                Course chapters
+                                Course sections
                             </h2>
                         </div>
-                        <ChaptersForm
+                        <SectionsForm
                     initialData={course}
                     courseId={course.id}
                     />
@@ -163,10 +171,15 @@ const CourseIdPage =  async (
                             Sell your course
                         </h2>
                     </div>
+                    <RealPriceForm
+                    initialData={course}
+                    courseId={course.id}
+                    />
                     <PriceForm
                     initialData={course}
                     courseId={course.id}
                     />
+                    
                 </div>
                 <div>
                     <div className="flex items-center gap-x-2">

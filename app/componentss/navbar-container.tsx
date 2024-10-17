@@ -3,7 +3,7 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { UserButton } from "@clerk/nextjs";
+
 import { useEffect, useState } from "react";
 import { MobileSidebar } from "../(dashboard)/_components/mobile-sidebar";
 import { usePathname } from "next/navigation";
@@ -73,11 +73,11 @@ export default function NavBarContainer({
                 </Link>
 
                 {/* Conditionally render UserButton or Sign Up */}
-                {userId ? ( // Check if userId exists
-                  <UserButton afterSignOutUrl="/" /> // UserButton displayed if user is authenticated
+                {/* {userId ? ( // Check if userId exists */}
+                  {/* } UserButton displayed if user is authenticated
                 ) : (
-                  null // Render nothing if user is not authenticated
-                )}
+                  null  Render nothing if user is not authenticated
+                )} */}
               </div>
             </div>
           </nav>
