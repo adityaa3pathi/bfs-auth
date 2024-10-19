@@ -9,7 +9,7 @@ import { isTeacher } from "../../../../lib/teacher";
 
 interface SearchPageClientProps {
   courses: any[];  // Replace with your actual course type
-  userId: string;
+  userId: string | null;
 }
 
 export const SearchPageClient = ({ courses, userId }: SearchPageClientProps) => {

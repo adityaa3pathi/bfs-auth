@@ -1,6 +1,6 @@
-import { getUserId } from "../../../../../../lib/auth-utils";
+import { getUserId } from "../../../../../../../../lib/auth-utils";
 import { NextResponse } from "next/server";
-import prismadb from "../../../../../../lib/db";
+import prismadb from "../../../../../../../../lib/db";
 
 export async function PUT(
     req: Request,
