@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { CoursesList } from "../../../../components/courses-List";
+import { CoursesList } from "../../../(landing)/_components/courses-list-landing";
 import Link from "next/link";
 import { Button } from "../../../../components/ui/button";
 import { LogOut } from "lucide-react";
