@@ -1,14 +1,31 @@
-import { NavbarRoutes } from "@/../components/navbar-routes"
-import { MobileSidebar } from "./mobile-sidebar"
-import { SidebarRoutes } from "./sidebar-routes"
-import { Logo } from "./logo"
+import { getUserId } from "../../../lib/auth-utils";
+import { Chapter, Course, UserProgress } from "prisma/prisma-client";
+import NavBarContainer from "./navbar-container"; // Import client component
+import { usePathname, useRouter } from "next/navigation";
 
-export const Navbar = () => {
 
-    return (
-        <div className="p-4 border-b h-full flex items-center bg-white shadow-sm">
-       
-        <NavbarRoutes/>
-        </div>
-    )
+
+
+
+
+export default async function NavBar() {
+
+      
+
+  const userId = await getUserId();
+
+
+  // Fetch userId in the server-side component
+  
+
+  // Pass the fetched userId to the client-side component
+  return (<>
+    
+    <NavBarContainer
+      userId={userId} // Pass userId from the server to the client
+     
+      
+    />
+    </>
+  );
 }

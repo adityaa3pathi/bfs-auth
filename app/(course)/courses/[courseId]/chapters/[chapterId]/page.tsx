@@ -42,29 +42,33 @@ const ChapterIdPage = async ({
   const completedOnEnd = !!purchase && !userProgress?.isCompleted;
 
 
-
   const coursee = await prismadb.course.findUnique({
     where: {
       id: params.courseId,
     },
     include: {
-      chapters: {
-        where: {
-          isPublished: true,
-        },
+      sections: {  // Include sections with chapters and userProgress
         include: {
-          userProgress: {
+          chapters: {
             where: {
-              userId,
+              isPublished: true,
+            },
+            include: {
+              userProgress: {
+                where: {
+                  userId,
+                },
+              },
+            },
+            orderBy: {
+              position: "asc",
             },
           },
-        },
-        orderBy: {
-          position: "asc",
         },
       },
     },
   });
+  
 
   if(!coursee) {
     redirect('/');

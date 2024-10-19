@@ -1,42 +1,27 @@
-import { getUserId } from "../../../../../lib/auth-utils";
-import { redirect } from "next/navigation";
-
-import { Chapter, Course, UserProgress } from "prisma/prisma-client"
-import prismadb from "@/../lib/db";
+import { Section, Chapter, Course, UserProgress } from "prisma/prisma-client";
 import { CourseListItem } from "./course-list-item";
-
-
+import { SectionItem } from "./section-item";
 
 interface CourseSidebarProps {
-    course: Course & {
-        chapters: (Chapter & {
-            userProgress: UserProgress[] | null;
-        })[]
-    };
-    progressCount: number;
+  course: Course & {
+    sections: (Section & {
+      chapters: (Chapter & {
+        userProgress: UserProgress[] | null;
+      })[];
+    })[];
+  };
+  progressCount: number;
 }
 
-export const   CourseContainer = async({
-    course,
-    progressCount,
-}: CourseSidebarProps ) => {
-  
-    return (
-        <div className=" m-4 space-y-2  rounded-xl">
-          {course.chapters.map((chapter) => (
-            <CourseListItem
-            key={chapter.id}
-            id={chapter.id}
-            label={chapter.title}
-            isCompleted={!!chapter.userProgress?.[0]?.isCompleted}
-            courseId={course.id}
-            isLocked={!chapter.IsFree }
-  
-            />
-          ))}
-        </div>
-      );
-
-
-}
-
+export const CourseContainer = async ({
+  course,
+  progressCount,
+}: CourseSidebarProps) => {
+  return (
+    <div className="m-4 space-y-2 rounded-xl">
+      {course.sections.map((section) => (
+        <SectionItem key={section.id} section={section} courseId={course.id} />
+      ))}
+    </div>
+  );
+};

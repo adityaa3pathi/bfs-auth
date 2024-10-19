@@ -80,7 +80,8 @@ import prismadb from "../../../../lib/db";
 import { redirect } from "next/navigation";
 import Footer from "../../../componentss/footer";
 import { getProgress } from "../../../../actions/get-progress";
-import NavBar from "../../../componentss/nav-bar";
+import NavBar from "../../../(dashboard)/_components/navbar";
+
 
 
 

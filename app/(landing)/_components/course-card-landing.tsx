@@ -2,13 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatPrice } from "../../../lib/format";
 
+
 interface CourseCardProps {
     id: string;
     title: string;
     imageUrl: string;
     chaptersLength: number;
     price: number;
-    
+    realPrice: number;
+    description: string;
     category: string;
 }
 
@@ -18,7 +20,8 @@ export const CourseCard = ({
     imageUrl,
     chaptersLength,
     price,
-    
+    realPrice,
+    description,
     category,
 }: CourseCardProps) => {
   return ( 
@@ -43,18 +46,20 @@ export const CourseCard = ({
 
 
 
-    <div className="col-span-3 flex flex-col space-y-3 pr-8 text-left">
+    <div className="col-span-3 flex flex-col space-y-3  text-left">
     <a href="#" className="mt-3 overflow-hidden text-2xl font-semibold"> {title}</a>
-    <p className="overflow-hidden text-sm">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna .</p>
+    <p className="overflow-hidden text-sm">{description}</p>
     <Link href={`/courses/${id}`} className="text-sm font-semibold text-gray-300 hover:text-gray-500">Saurabh Badaya</Link>
 
     <div className="flex flex-col text-gray-700 ">
       <div className="flex  justify-between h-fit space-x-2 text-sm font-medium">
-        <div className="rounded-full bg-green-100 px-2 py-0.5 text-green-700">{formatPrice(price)}</div>
-
-        <div className="rounded-full bg-blue-100 px-2 py-0.5 text-blue-700"> {chaptersLength} {chaptersLength === 1 ? "Lesson" : "Lessons"}</div>
+        <div className="flex">
+        <div className="rounded-full  bg-green-100 px-2 py-2 text-green-700">{formatPrice(price)}</div>
+        <div className="rounded-full px-1 py-2 text-white line-through">{formatPrice(realPrice)}</div>
+        </div>
+        <div className="rounded-full py-2 bg-blue-100 px-2 text-blue-700"> {chaptersLength} {chaptersLength === 1 ? "Lesson" : "Lessons"}</div>
       </div>
-      <a href="#" className="my-5 rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white sm:ml-auto">Enroll Now </a>
+      <a href="#" className="my-5 rounded-md px-5 py-2 text-center transition hover:scale-105 bg-orange-600 text-white ">Enroll Now </a>
     </div>
   </div>
 

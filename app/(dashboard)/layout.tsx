@@ -1,5 +1,5 @@
 import { SideBar } from "./_components/sidebar";
-import Navbar from "../(landing)/_components/nav-bar";
+import Navbar from "./_components/navbar";
 import Footer from "../componentss/footer";
 import "../globals.css";
 
@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className=" hidden md:flex w-[250px] flex-shrink-0"> {/* Define width for SideBar */}
           <SideBar />
         </div>
-        <div className="flex-grow m-4 overflow-auto m-4"> {/* Adjust children to avoid overlap */}
+        <div className="flex-grow m-4 overflow-auto "> {/* Adjust children to avoid overlap */}
           {children}
         </div>
       </main>

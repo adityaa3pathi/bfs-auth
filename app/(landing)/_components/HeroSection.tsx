@@ -63,12 +63,12 @@ const HeroSection = () => {
         <div className="mt-8">
           <Link href="/search">
           <button className="px-6 py-3 bg-gradient-to-t from-pink-400  to-orange-400 text-white rounded-full shadow-lg mr-4">
-            Register Now
+            Explore Now
           </button>
           </Link>
-          <button className="px-6 py-3 bg-transparent border border-white text-white rounded-full shadow-lg">
+          {/* <button className="px-6 py-3 bg-transparent border border-white text-white rounded-full shadow-lg">
             Watch Intro
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

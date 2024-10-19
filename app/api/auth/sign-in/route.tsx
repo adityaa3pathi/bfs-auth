@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { SignJWT } from 'jose'; // Import SignJWT from jose
-import { TextEncoder } from 'util'; // Required to encode the JWT secret
+import { SignJWT } from 'jose';
+import { TextEncoder } from 'util';
+import bcrypt from 'bcryptjs'; // Import bcryptjs for password hashing
 import prismadb from '../../../../lib/db';
 
 const MAX_SESSIONS = 2;
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Keep this secret in your .env file
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Store this secret in your .env file
 const secret = new TextEncoder().encode(JWT_SECRET); // Encode the secret for jose
 
 export async function POST(request: Request) {
@@ -25,8 +26,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
   }
 
-  // Verify password (ensure that this comparison is handled securely in production)
-  if (password !== user.password) {
+  // Verify the password using bcrypt
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
     console.log('Incorrect password');
     return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
   }

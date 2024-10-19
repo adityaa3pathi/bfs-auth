@@ -33,7 +33,8 @@ interface CoursesListProps {
                       imageUrl={item.imageUrl!}
                       chaptersLength={item.chapters.length}
                       price={item.price!}
-                      
+                      realPrice={item.realPrice!}
+                      description={item.description!}
                       category={item?.category?.name!}
                                 />
                     )}

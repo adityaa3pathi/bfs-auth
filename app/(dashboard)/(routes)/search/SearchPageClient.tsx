@@ -21,8 +21,8 @@ export const SearchPageClient = ({ courses, userId }: SearchPageClientProps) => 
   const isSearchPage = pathname === "/search";
 
   return (
-    <div className="bg-gray-900">
-      <div className="flex gap-x-2 ml-auto ">
+    <div>
+      <div className="flex gap-x-2 ml-auto">
         {isTeacherPage || isCoursePage ? (
           <Link href="/search">
             <Button>

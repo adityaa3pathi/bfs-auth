@@ -36,5 +36,5 @@ export async function middleware(request: Request) {
 
 // Apply middleware to protect routes under '/search'
 export const config = {
-  matcher: ['/search'], // Protect '/search' routes
+  matcher: ['/creator'], // Protect '/search' routes
 };

@@ -22,7 +22,7 @@ import { CourseCard } from "./course-card";
  }: CoursesListProps) => {
     return (
        <div>
-       <div className="  grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-4">
+       <div className="  grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
                     {items.map((item) => 
                    <CourseCard
                       key={item.id}

@@ -7,6 +7,7 @@ import { cn } from "../../../../../lib/utils";
 interface CourseSidebarItemProps {
     label: string;
     id: string;
+    // userProgress: string;
     isCompleted: boolean;
     courseId: string;
     isLocked: boolean;
@@ -15,6 +16,7 @@ interface CourseSidebarItemProps {
 export const CourseListItem = ({
     label,
     id,
+    // userProgress,
     isCompleted,
     courseId,
     isLocked,

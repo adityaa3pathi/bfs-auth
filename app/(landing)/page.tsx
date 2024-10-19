@@ -1,5 +1,4 @@
-import { UserButton } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/server";
+
 import HeroSection from "./_components/HeroSection";
 import FAQSection from "./_components/Faqs";
 import  Stats  from "./_components/Stats";

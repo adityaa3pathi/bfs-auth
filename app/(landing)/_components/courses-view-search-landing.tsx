@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+
 import { getCourses } from "../../../actions/get-landing-courses";
 import prismadb from "../../../lib/db";
 import { SearchPageClient } from "./search-page-client-landing";

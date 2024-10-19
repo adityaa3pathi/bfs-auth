@@ -2,7 +2,9 @@ import { cookies } from 'next/headers'; // Import cookies to access authToken
 import { jwtVerify } from 'jose'; // Use jose to verify JWT
 import prismadb from "../../../../lib/db";
 import { getCourses } from "../../../../actions/get-courses";
+import { getPublicCourses } from "../../../../actions/get-public-courses";
 import { SearchPageClient } from "./SearchPageClient";
+import { getUserId } from '../../../../lib/auth-utils';
 
 interface SearchPageProps {
   searchParams: {
@@ -27,19 +29,23 @@ async function verifyToken(token: string) {
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   // Get the cookies from the request
-  const cookieStore = cookies();
-  const token = cookieStore.get('authToken')?.value; // Get the authToken from cookies
+ // Get the authToken from cookies
 
-  if (!token) {
-    console.log('No token found, redirecting to login');
-    return null; // Redirect or handle the missing token scenario
-  }
+  
 
   // Verify the token and extract the userId
-  const userId = await verifyToken(token);
-  if (!userId) {
-    console.log('Invalid token, redirecting to login');
-    return null; // Redirect or handle the invalid token scenario
+  const userId = await getUserId();
+
+
+  if (userId === null) {
+    console.log(' you are an Ananomyous user');
+
+    const courses = await getPublicCourses({
+      ...searchParams,
+    });
+
+
+    return <SearchPageClient courses={courses} userId={userId} />; //  returning courses which are published and can be accessed pu
   }
 
   // Fetch categories (if needed)
@@ -48,6 +54,8 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
       name: 'asc',
     },
   });
+
+
 
   // Fetch courses based on userId and search params
   const courses = await getCourses({

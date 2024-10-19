@@ -160,5 +160,10 @@ body {
   font-size: 16px !important;
 }
 
+.thick-strikethrough {
+  text-decoration: line-through;
+  text-decoration-thickness: p4x; /* Adjust this value for desired thickness */
+}
+
 @import "~@uploadthing/react/styles.css"
 
