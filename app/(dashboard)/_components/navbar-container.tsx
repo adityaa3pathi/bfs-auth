@@ -84,11 +84,11 @@ export default function NavBarContainer({
           </Link>
 
           {/* Hamburger Menu (Mobile) */}
-          <div className="flex items-center sm:hidden">
+          <div className="flex items-center sm:hidden justify-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="text-gray-200 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#a35076]"
+              className="text-gray-200 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#a35076] justify-between"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -120,7 +120,7 @@ export default function NavBarContainer({
             </a>
             <a
               href="#about"
-              className="text-gray-200 hover:text-[#a35076] transition-colors"
+              className="text-gray-200 hover:text-[#a35076] transition-colors "
             >
               About Us
             </a>
@@ -130,12 +130,15 @@ export default function NavBarContainer({
             >
               Contact Us
             </a>
+            <div className="flex items-center justify-between ">
             <a
-              href="#slam-jam"
-              className="bg-[#a35076] text-white px-4 py-2 rounded-lg hover:bg-[#832b55] transition-all"
-            >
-              Slam Jam League
-            </a>
+  href="#slam-jam"
+  className="bg-[#a35076] text-white px-4 py-2 rounded-lg hover:bg-[#832b55] transition-all flex items-center justify-center whitespace-nowrap"
+>
+  Slam Jam
+</a>
+
+            </div>
             {/* Conditionally render Login or Logout button */}
             {userId ? (
               <button
@@ -181,7 +184,7 @@ export default function NavBarContainer({
               href="#slam-jam"
               className="block bg-[#a35076] text-white px-4 py-2 rounded-lg hover:bg-[#832b55] transition-all "
             >
-              Slam Jam League
+              Slam Jam 
             </a>
             {/* Conditionally render Login or Logout button for mobile */}
             {userId ? (

@@ -4,12 +4,14 @@ import {Attachment, Chapter } from "@prisma/client";
 interface GetChapterProps {
     userId: string;
     courseId: string;
+    
     chapterId: string;
 }
 export const getChapter = async ({
     userId,
     courseId,
     chapterId,
+    
   }: GetChapterProps) => {
     try {
       const purchase = await prismadb.purchase.findUnique({
@@ -44,7 +46,7 @@ export const getChapter = async ({
   
       let attachments: Attachment[] = [];
       let nextChapter: Chapter | null = null;
-      // let muxData: { id: string; assetId: string; playbackId: string | null; chapterId: string; } | null = null;
+      let muxData: { id: string; assetId: string; playbackId: string | null; chapterId: string; } | null = null;
   
       // Fetch attachments only if a purchase was made
       if (purchase) {
@@ -52,16 +54,16 @@ export const getChapter = async ({
           where: {
             courseId: courseId,
           },
-        });
+        }); 
       }
   
       // Fetch muxData and nextChapter only if the chapter is free or purchased
       if (chapter.IsFree || purchase) {
-        // muxData = await prismadb.muxData.findUnique({
-        //   where: {
-        //     chapterId: chapterId,
-        //   },
-        // });
+        muxData = await prismadb.muxData.findUnique({
+          where: {
+            chapterId: chapterId,
+          },
+        });
   
         nextChapter = await prismadb.chapter.findFirst({
           where: {
@@ -89,8 +91,8 @@ export const getChapter = async ({
       return {
         chapter,
         course,
-        videoUrl: chapter.videoUrl,
-        // muxData,
+       
+         muxData,
         attachments,
         nextChapter,
         userProgress,
@@ -101,7 +103,8 @@ export const getChapter = async ({
       return {
         chapter: null,
         course: null,
-        // muxData: null,
+        section: null,
+         muxData: null,
         attachments: [],
         nextChapter: null,
         userProgress: null,

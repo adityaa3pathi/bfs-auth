@@ -19,6 +19,7 @@ interface ChapterClientPageProps {
       })[];
     })[];
   };
+  muxData: any;
   purchase: any;
   attachments: any;
   nextChapter: any;
@@ -37,6 +38,7 @@ const ChapterClientPage = ({
   purchase,
   completedOnEnd,
   params,
+  muxData,
   course,
   progressCount,
 }: ChapterClientPageProps) => {
@@ -61,7 +63,7 @@ const ChapterClientPage = ({
             title={chapter.title}
             courseId={params.courseId}
             nextChapterId={nextChapter?.id}
-            videoUrl={chapter.videoUrl}
+            playbackId={muxData?.playbackId}
             isLocked={isLocked}
             completedOnEnd={completedOnEnd}
           />

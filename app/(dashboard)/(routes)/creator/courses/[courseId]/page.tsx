@@ -100,11 +100,11 @@ const CourseIdPage =  async (
 
             <div className="flex item-center justify-between">
                 <div className="flex flex-col gap-y-2">
-                    <h1 className= "text-gray-800 text-2xl font-medium">
+                    <h1 className= "text-gray-200 text-2xl font-medium">
                         Course Setup
 
                     </h1>
-                       <span className="text-sm text-slate-700">
+                       <span className="text-sm text-slate-200">
                         Complete all fields {completionText}
 
 
@@ -124,7 +124,7 @@ const CourseIdPage =  async (
                     <div className="flex items-center gap-x-2">
 
                     <IconBadge icon={LayoutDashboard} />
-                        <h2 className=" text-gray-700 text-xl">   
+                        <h2 className=" text-gray-200 text-xl">   
                             Customize your course
                         </h2>
                     </div>

@@ -23,6 +23,7 @@ const ChapterIdPage = async ({
   const {
     chapter,
     course,
+    muxData,
     attachments,
     nextChapter,
     userProgress,
@@ -87,6 +88,7 @@ const ChapterIdPage = async ({
       userProgress={userProgress}
       isLocked={isLocked}
       purchase={purchase}
+      muxData={muxData}
       completedOnEnd={completedOnEnd}
       params={params}
       progressCount={progressCount}

@@ -1,6 +1,7 @@
 "useclient"
 
 import axios from "axios";
+import MuxPlayer from "@mux/mux-player-react";
 
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -12,7 +13,7 @@ import { useConfettiStore } from "../../../../../../../hooks/use-confetti-store"
 
 
 interface VideoPlayerProps {
-    videoUrl: string;
+    playbackId: string;
     courseId: string;
     chapterId: string;
     nextChapterId?: string;
@@ -21,13 +22,13 @@ interface VideoPlayerProps {
     title: string; 
 }
 
-const extractVideoId = (url: string) => {
-    const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-    return videoIdMatch ? videoIdMatch[1] : null;
-};
+// const extractVideoId = (url: string) => {
+//     const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+//     return videoIdMatch ? videoIdMatch[1] : null;
+// };
 
-export const VideoPlayer = ({
-videoUrl,
+export const  VideoPlayer = ({
+playbackId,
 courseId,
 chapterId,
 nextChapterId,
@@ -39,7 +40,7 @@ title,
     const [isReady, setIsReady] = useState(false);  
 
 
-    const videoId = extractVideoId(videoUrl);
+    // const videoId = extractVideoId(videoUrl);
 
 return (<div className="relative aspect-video">
     { !isReady && !isLocked && (
@@ -56,6 +57,22 @@ return (<div className="relative aspect-video">
 
         </div>
     )}
+
+
+{!isLocked && (
+    <MuxPlayer
+    title={title}
+    className={cn(
+        !isReady && "hidden"
+    )}
+    onCanPlay={() => setIsReady(true)}
+        autoPlay
+        playbackId={playbackId}
+/>
+)}
+
+
+{/*     
     {!isLocked && videoId && (
            <iframe
            className={`w-full h-full ${!isReady ? "hidden" : ""}`}
@@ -65,7 +82,7 @@ return (<div className="relative aspect-video">
            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
            allowFullScreen
        />
-    )}
+    )} */}
    
 </div>)
 }

@@ -92,7 +92,7 @@ const Navbar = () => {
               href="#slam-jam"
               className="bg-[#a35076] text-white px-4 py-2 rounded-lg hover:bg-[#832b55] transition-all"
             >
-              Slam Jam League
+              Slam Jam
             </a>
           </div>
         </div>
@@ -124,7 +124,7 @@ const Navbar = () => {
               href="#slam-jam"
               className="block bg-[#a35076] text-white px-4 py-2 rounded-lg hover:bg-[#832b55] transition-all"
             >
-              Slam Jam League
+              Slam Jam
             </a>
           </div>
         </div>

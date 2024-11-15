@@ -7,7 +7,9 @@ interface CourseSidebarProps {
     sections: (Section & {
       chapters: (Chapter & {
         userProgress: UserProgress[] | null;
+        createdAt: Date; // Ensure createdAt is defined in Section model
       })[];
+      createdAt: Date; // Ensure createdAt is defined in Section model
     })[];
   };
   progressCount: number;
@@ -19,9 +21,11 @@ export const CourseContainer = async ({
 }: CourseSidebarProps) => {
   return (
     <div className="m-4 space-y-2 rounded-xl">
-      {course.sections.map((section) => (
-        <SectionItem key={section.id} section={section} courseId={course.id} />
-      ))}
+      {course.sections
+        .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime()) // Sort sections by createdAt
+        .map((section) => (
+          <SectionItem key={section.id} section={section} courseId={course.id} />
+        ))}
     </div>
   );
 };
