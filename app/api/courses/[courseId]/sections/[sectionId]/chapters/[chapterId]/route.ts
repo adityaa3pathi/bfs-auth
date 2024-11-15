@@ -12,8 +12,6 @@ const { video } = new Mux({
 }
 );
 
-export const dynamic = "force-dynamic";
-
 export async function DELETE(
     req:Request,
     {params} : {
@@ -23,8 +21,8 @@ export async function DELETE(
     
 
 
-    const  userId =  await getUserId();
 try {
+    const  userId =  await getUserId();
 
 
     if(!userId) {
