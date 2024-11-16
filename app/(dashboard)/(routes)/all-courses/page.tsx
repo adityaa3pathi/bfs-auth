@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { redirect } from "next/navigation";
 import { getDashboardCourses } from "../../../../actions/get-dashboard-courses";
 import { CoursesList } from "../../../../components/courses-List";

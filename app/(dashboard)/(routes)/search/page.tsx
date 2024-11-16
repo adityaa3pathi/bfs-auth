@@ -1,4 +1,5 @@
-import { cookies } from 'next/headers'; // Import cookies to access authToken
+export const dynamic = "force-dynamic";
+
 import { jwtVerify } from 'jose'; // Use jose to verify JWT
 import prismadb from "../../../../lib/db";
 import { getCourses } from "../../../../actions/get-courses";

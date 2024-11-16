@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getUserId } from "../../../../../lib/auth-utils";
 import { redirect } from "next/navigation";
 import { getAnalytics } from "../../../../../actions/get-analytics";
