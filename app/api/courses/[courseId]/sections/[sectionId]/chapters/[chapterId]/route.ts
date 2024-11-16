@@ -1,3 +1,4 @@
+'use client'
 import { NextResponse } from "next/server";
 import Mux from "@mux/mux-node"
 import prismadb from "../../../../../../../../lib/db";
@@ -12,6 +13,8 @@ const { video } = new Mux({
 }
 );
 
+export const dynamic = "force-dynamic";
+
 export async function DELETE(
     req:Request,
     {params} : {
@@ -21,8 +24,8 @@ export async function DELETE(
     
 
 
-try {
     const  userId =  await getUserId();
+try {
 
 
     if(!userId) {

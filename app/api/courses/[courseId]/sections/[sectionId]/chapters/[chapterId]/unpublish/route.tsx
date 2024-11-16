@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getUserId } from "../../../../../../../../../lib/auth-utils";
 import exp from "constants";
 import { NextResponse } from "next/server";
