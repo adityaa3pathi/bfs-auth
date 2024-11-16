@@ -1,4 +1,4 @@
-'use client'
+
 import { NextResponse } from "next/server";
 import Mux from "@mux/mux-node"
 import prismadb from "../../../../../../../../lib/db";
