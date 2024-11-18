@@ -19,6 +19,15 @@ export default function NavBarContainer({
   const [navBackground, setNavBackground] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const [currentUserId, setCurrentUserId] = useState(userId);
+
+
+  useEffect(() => {
+    if (userId !== currentUserId) {
+      setCurrentUserId(userId);
+      window.location.reload(); // Trigger a refresh when userId changes
+    }
+  }, [userId, currentUserId, router]);
 
   // Handle scroll to add background color on scroll
   useEffect(() => {

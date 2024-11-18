@@ -9,14 +9,15 @@ import Footer from "../componentss/footer";
 import { CoursesList } from "./_components/courses-list-landing";
 import SearchPage from "./_components/courses-view-search-landing";
 import TestimonialSlider from "./_components/testimonials";
-import Navbar from "./_components/nav-bar";
+import NavBar from "../(dashboard)/_components/navbar";
+
 
 
 export default function Landing() {
     return(
 <div>
         <div>
-            <Navbar/>
+            <NavBar/>
             <HeroSection/>
             </div>
             <div>
