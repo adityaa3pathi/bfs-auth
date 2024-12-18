@@ -22,8 +22,11 @@ export default function Login() {
     });
 
     if (res.ok) {
-      router.refresh();
-      router.push('/search'); // Redirect after login
+
+      
+      router.push('/search'); 
+      router.refresh();// Redirect after login
+      
     } else {
       const data = await res.json();
       console.error(data.error);

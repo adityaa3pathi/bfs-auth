@@ -4,7 +4,7 @@ import { TextEncoder } from 'util';
 import bcrypt from 'bcryptjs'; // Import bcryptjs for password hashing
 import prismadb from '../../../../lib/db';
 
-const MAX_SESSIONS = 2;
+const MAX_SESSIONS = 1;
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Store this secret in your .env file
 const secret = new TextEncoder().encode(JWT_SECRET); // Encode the secret for jose
 
