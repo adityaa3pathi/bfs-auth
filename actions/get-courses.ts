@@ -27,6 +27,7 @@ export const getCourses = async ({
 
 
     try {
+        console.log(" at getcourses for authenticated users")
                 const courses = await prismadb.course.findMany({
                     where: {
                         isPublished: true,

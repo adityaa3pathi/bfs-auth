@@ -78,7 +78,7 @@
 import { getUserId } from "../../../../lib/auth-utils";
 import prismadb from "../../../../lib/db";
 import { redirect } from "next/navigation";
-import Footer from "../../../componentss/footer";
+import Footer from "../../../(landing)/_components/footer";
 import { getProgress } from "../../../../actions/get-progress";
 import NavBar from "../../../(dashboard)/_components/navbar";
 
@@ -97,42 +97,62 @@ const CourseLayout = async ({
 
   // Handle the case where the user is not authenticated
   if (!userId) {
-    redirect("/");
-    return null; // Important: Return null to prevent further rendering after redirect
+
+    //adding the logic to render course page even if the user is not logged in
+    const course = await prismadb.course.findUnique({
+      where: {
+        id: params.courseId,
+      },
+      include: {
+        chapters: {
+          where: {
+            isPublished: true,
+          },
+           orderBy: {
+          position: "asc",
+        },
+        }
+
+      }
+    })
+    // redirect("/");
+   // return null;  Important: Return null to prevent further rendering after redirect
   }
 
   // Fetch course with chapters and progress
-  const course = await prismadb.course.findUnique({
-    where: {
-      id: params.courseId,
-    },
-    include: {
-      chapters: {
-        where: {
-          isPublished: true,
-        },
-        include: {
-          userProgress: {
-            where: {
-              userId,
-            },
+if(userId){
+const course = await prismadb.course.findUnique({
+  where: {
+    id: params.courseId,
+  },
+  include: {
+    chapters: {
+      where: {
+        isPublished: true,
+      },
+      include: {
+        userProgress: {
+          where: {
+            userId,
           },
         },
-        orderBy: {
-          position: "asc",
-        },
+      },
+      orderBy: {
+        position: "asc",
       },
     },
-  });
+  },
+});
 
   // Redirect to home if the course doesn't exist
   if (!course) {
     redirect("/");
     return null;
   }
+}
 
   // Fetch the progress count
-  const progressCount = await getProgress(userId, course.id);
+  // const progressCount = await getProgress(userId, course.id);
 
   return (
     <div className="flex flex-col justify-between bg-gray-00 text-gray-200 min-h-screen">

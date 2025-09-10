@@ -10,8 +10,6 @@ export const getCourses = async () => {
         const courses = await prismadb.course.findMany({
             where: {
                 isPublished: true,
-
-                
             },
             include: {
                 category: true,

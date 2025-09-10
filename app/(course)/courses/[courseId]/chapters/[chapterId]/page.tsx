@@ -6,6 +6,7 @@ import ChapterClientPage from "./chapter-client-page"; // Client Component
 
 import prismadb from "../../../../../../lib/db";
 import { getProgress } from "../../../../../../actions/get-progress";
+import { getPublicChapter } from "../../../../../../actions/get-public-chapter";
 
 
 const ChapterIdPage = async ({
@@ -15,12 +16,10 @@ const ChapterIdPage = async ({
 }) => {
   const  userId = await getUserId(); 
 
-  if (!userId) {
-    redirect("/");
-    return null;
-  }
+  let chapter, course, muxData, attachments, nextChapter, userProgress, purchase;
 
-  const {
+  if (userId) {(
+    {
     chapter,
     course,
     muxData,
@@ -32,7 +31,24 @@ const ChapterIdPage = async ({
     userId,
     chapterId: params.chapterId,
     courseId: params.courseId,
-  });
+  }));
+  }
+
+  else {(
+   {
+    chapter,
+    course,
+    muxData,
+    attachments,
+    nextChapter,
+    
+  } = await getPublicChapter({
+    
+    chapterId: params.chapterId,
+    courseId: params.courseId,
+  }));
+
+}
 
   if (!chapter || !course) {
     redirect("/");
@@ -56,9 +72,7 @@ const ChapterIdPage = async ({
             },
             include: {
               userProgress: {
-                where: {
-                  userId,
-                },
+                where: userId ? { userId } : {},
               },
             },
             orderBy: {
@@ -75,7 +89,7 @@ const ChapterIdPage = async ({
     redirect('/');
   }
 
-  const progressCount = await getProgress(userId, coursee.id);
+  const progressCount = userId ? await getProgress(userId, coursee.id) : 0;
 
 
   // Pass the fetched data to a client-side component

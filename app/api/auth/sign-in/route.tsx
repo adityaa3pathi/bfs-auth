@@ -4,6 +4,8 @@ import { TextEncoder } from 'util';
 import bcrypt from 'bcryptjs'; // Import bcryptjs for password hashing
 import prismadb from '../../../../lib/db';
 
+
+
 const MAX_SESSIONS = 1;
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Store this secret in your .env file
 const secret = new TextEncoder().encode(JWT_SECRET); // Encode the secret for jose
@@ -23,7 +25,7 @@ export async function POST(request: Request) {
 
   if (!user) {
     console.log('User not found');
-    return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+    return NextResponse.json({ error: 'Invalid email or password 1' }, { status: 401 });
   }
 
   // Verify the password using bcrypt
@@ -31,7 +33,7 @@ export async function POST(request: Request) {
 
   if (!isPasswordValid) {
     console.log('Incorrect password');
-    return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+    return NextResponse.json({ error: 'Invalid email or password2' }, { status: 401 });
   }
 
   // Fetch user sessions

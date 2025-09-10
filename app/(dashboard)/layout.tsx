@@ -1,6 +1,6 @@
 import { SideBar } from "./_components/sidebar";
 import Navbar from "./_components/navbar";
-import Footer from "../componentss/footer";
+import Footer from "../(landing)/_components/footer";
 import "../globals.css";
 
 // import { Sidebar } from "lucide-react";

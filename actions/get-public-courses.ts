@@ -16,6 +16,7 @@ export const getPublicCourses = async ({
     categoryId,
 }: GetPublishedCoursesParams): Promise<CourseWithCategory[]> => {
     try {
+        console.log("at public route")
         const courses = await prismadb.course.findMany({
             where: {
                 isPublished: true,

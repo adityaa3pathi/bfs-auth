@@ -1,3 +1,5 @@
+
+
 import { Category, Course, } from "prisma/prisma-client"
 import { CourseCard } from "./course-card-landing";
 import { getCourses } from "../../../actions/get-landing-courses";
