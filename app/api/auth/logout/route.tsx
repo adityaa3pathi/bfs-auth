@@ -40,7 +40,9 @@ export async function POST(request: Request) {
 
     return response;
   } catch (error) {
+    console.log("you'll see the error below")
     console.error(error);
+    
     return NextResponse.json({ error: 'Invalid token or session' }, { status: 401 });
   }
 }

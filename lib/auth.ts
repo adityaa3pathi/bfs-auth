@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prismadb from './db'; // Adjust path to your Prisma client setup
 
-const MAX_SESSIONS = 2;
+const MAX_SESSIONS = 1;
 
 export const authOptions = {
   providers: [
