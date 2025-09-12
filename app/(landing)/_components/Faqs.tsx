@@ -4,18 +4,36 @@ import { useState } from 'react';
 
 const faqs = {
   General: [
-    { question: "How do I update my billing information?", answer: "You can update your billing info in the profile section." },
-    { question: "How do I reset my password?", answer: "You can reset your password by clicking 'Forgot Password' on the login page." },
-  ],
-  Support: [
-    { question: "How can I contact customer support?", answer: "You can contact customer support via email or live chat." },
-    { question: "What is the response time for support?", answer: "Our response time is within 24 hours." },
-  ],
-  Others: [
-    { question: "How do I find my purchase history?", answer: "You can find your purchase history in the orders section of your account." },
-    { question: "How do I update my profile information?", answer: "To update your profile, navigate to the settings page." },
-  ],
-};
+  { 
+    question: "How do I purchase a basketball course?", 
+    answer: "You can browse our courses, select the one you want, and complete payment at checkout." 
+  },
+  { 
+    question: "Can I access the course on mobile?", 
+    answer: "Yes, all our courses are mobile-friendly and can be accessed on any device with internet." 
+  },
+],
+Support: [
+  { 
+    question: "How can I contact the academy for help?", 
+    answer: "You can reach out to us through our contact page, email, or live chat support." 
+  },
+  { 
+    question: "What if I face issues accessing a video?", 
+    answer: "If you have trouble watching videos, please clear your cache or try another browser. If the issue persists, contact support." 
+  },
+],
+Others: [
+  { 
+    question: "Where can I find the courses I’ve purchased?", 
+    answer: "All purchased courses are available in your account dashboard under 'My Courses'." 
+  },
+  { 
+    question: "Can I update my profile or player details?", 
+    answer: "Yes, you can update your personal and player information anytime from the settings page in your account." 
+  },
+],
+}
 
 export default function FAQSection() {
   const [activeTab, setActiveTab] = useState('General');
