@@ -4,28 +4,14 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers"; // Import cookies utility from Next.js
 import { jwtVerify } from "jose"; // Import jwtVerify from jose
 import { TextEncoder } from "util"; // Import TextEncoder for encoding the secret
+import { getUserId } from "../../../../lib/auth-utils";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret"; // Your JWT secret
-const secret = new TextEncoder().encode(JWT_SECRET); // Encode the secret for jose
 
-// Helper function to verify the JWT token and extract the userId
-async function verifyToken(token: string) {
-    try {
-        const { payload } = await jwtVerify(token, secret);
-        return payload.userId as string; // Return userId
-    } catch (error) {
-        console.log("Error verifying token:", error);
-        return null;
-    }
-}
+
 
 const TeacherLayout = async ({ children }: { children: ReactNode }) => {
     // Access cookies from the request using next/headers
-    const cookieStore = cookies();
-    const token = cookieStore.get("authToken")?.value; // Retrieve the authToken from cookies
-
-    // Verify the token to get userId
-    const userId = token ? await verifyToken(token) : null;
+   const userId = await getUserId();
 
     // Redirect if userId is not found
     if (!userId) {

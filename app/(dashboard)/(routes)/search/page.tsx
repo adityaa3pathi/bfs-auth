@@ -14,19 +14,7 @@ interface SearchPageProps {
   };
 }
 
-// JWT secret for verifying the token
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; 
 
-// Helper function to verify JWT token and extract userId
-async function verifyToken(token: string) {
-  try {
-    const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
-    return payload.userId as string; // Extract userId from the token payload
-  } catch (error) {
-    console.log('Error verifying token:', error);
-    return null;
-  }
-}
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   // Get the cookies from the request

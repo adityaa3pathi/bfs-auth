@@ -7,6 +7,7 @@ import prismadb from "../../../../../lib/db";
 import { cookies } from 'next/headers'; // Use cookies utility to access cookies
 import { jwtVerify } from 'jose'; // Import the jwtVerify function
 import { TextEncoder } from 'util'; // Import TextEncoder for encoding the secret
+import { getUserId } from "../../../../../lib/auth-utils";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Your JWT secret
 const secret = new TextEncoder().encode(JWT_SECRET); // Encode the secret for jose
@@ -23,11 +24,13 @@ async function verifyToken(token: string) {
 
 const CoursesPage = async () => {
     // Access cookies from the request using next/headers
-    const cookieStore = cookies();
-    const token = cookieStore.get('authToken')?.value; // Retrieve the authToken from cookies
+    // const cookieStore = cookies();
+    // const token = cookieStore.get('authToken')?.value; // Retrieve the authToken from cookies
 
-    // Verify the token to get userId
-    const userId = token ? await verifyToken(token) : null;
+    // // Verify the token to get userId
+    // const userId = token ? await verifyToken(token) : null;
+
+    const userId = await getUserId();
 
     // Redirect if userId is not found
     if (!userId) {
